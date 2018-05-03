@@ -47,3 +47,70 @@
     权值线段树，维护元素出现的次数，可以实现堆（之前的叫区间线段树）；
     SPOJ GSS3：
     长区间的最大子段和，分三种情况；其中跨越中心的情况就是最大后缀加最大前缀，所以同时要维护；
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+#include<queue>
+#include<algorithm>
+using namespace std;
+
+int n,k;
+int a[1000005];
+
+struct dddl
+{
+    int q[1000005];
+    int h,t;
+    void clear_()
+    {
+        h=t=0;
+    }
+    void push(int x)
+    {
+        while(h<t &&a[q[t-1]]<=a[x])
+            t--;
+        q[t++]=x;
+    }
+    void pop(int x)
+    {
+        if(h<t &&q[h]==x)
+            h++;
+    }
+    int ans()
+    {
+        return a[q[h]];
+    }
+}ddl;
+
+int main()
+{
+    scanf("%d%d",&n,&k);
+    for(int i=1;i<=n;i++)
+        scanf("%d",&a[i]);
+
+    for(int i=1;i<=n;i++)
+        a[i]=-a[i];
+    ddl.clear_();
+    for(int i=1;i<=n;i++)
+    {
+        ddl.push(i);
+        if(i>k)
+            ddl.pop(i-k);
+        if(i>=k)
+            printf("%d ",-ddl.ans());
+    }
+    puts(" ");
+
+    for(int i=1;i<=n;i++)
+        a[i]=-a[i];
+    ddl.clear_();
+    for(int i=1;i<=n;i++)
+    {
+        ddl.push(i);
+        if(i>k)
+            ddl.pop(i-k);
+        if(i>=k)
+            printf("%d ",ddl.ans());
+    }
+    return 0;
+}
