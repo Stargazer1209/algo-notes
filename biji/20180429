@@ -1,0 +1,167 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<cmath>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+
+int a[100];
+int b[100];
+int ans;
+
+void bubble_sort(int *a, int l, int r, int n)
+{
+	for (int i = 1; i < n; i++)
+	{
+		for (int j = l; j < r; j++)
+		{
+			if (a[j] > a[j + 1]) swap(a[j], a[j + 1]);
+		}
+	}
+}
+
+void merge_sort(int *a, int l, int r)
+{
+	if (l == r) return;
+	int mid = (l + r) >> 1;
+	merge_sort(a, l, mid);
+	merge_sort(a, mid + 1, r);
+	
+	int i = l, j = mid + 1;
+	//b：辅助数组 
+	for (int k = l; k <= r; k++)
+	{
+		if (j > r || (i <= mid && a[i] < a[j]))
+		{
+			b[k] = a[i];
+			i++;
+			ans += j - (mid + 1);
+		}
+		else
+		{
+			b[k] = a[j];
+			j++;
+		}
+	}
+	for (int k = l; k <= r; k++)
+		a[k] =b[k];
+}
+			
+
+void quick_sort(int *a, int l, int r)
+{
+	swap(a[l], a[rand()*rand() % (r -l + 1) +l]);
+	int tmp = a[l];
+	int l_ = l, r_ = r;
+	while (l < r)
+	{
+		while (l < r) 
+		{
+			if (a[r] > tmp) r--; //a[r]落在正确的位置 
+			else
+			{
+				a[l] = a[r];
+				l++;
+				break;
+			}
+		}
+		while (l < r) 
+		{
+			if (a[l] < tmp) l++; //a[l]落在正确的位置 
+			else
+			{
+				a[r] = a[l];
+				r--;
+				break;
+			}
+		}
+	}
+	a[l] = tmp;
+	if (l - l_ > 1) quick_sort(a, l_, l - 1);
+	if (r_ - r > 1) quick_sort(a, r + 1, r_);
+} 
+
+int quick_select(int *a, int l, int r, int k)
+{
+	swap(a[l], a[rand()*rand() % (r -l + 1) +l]);
+	int tmp = a[l];
+	int l_ = l, r_ = r;
+	while (l < r)
+	{
+		while (l < r) 
+		{
+			if (a[r] > tmp)r-- ; //a[r]落在正确的位置 
+			else
+			{
+				a[l] = a[r];
+				l++;
+				break;
+			}
+		}
+		while (l < r) 
+		{
+			if (a[l] < tmp) l++; //a[l]落在正确的位置 
+			else
+			{
+				a[r] = a[l];
+				r--;
+				break;
+			}
+		}
+	}
+	a[l] = tmp;
+	if (k == l - l_ + 1) return a[l];
+	if (k < l - l_ + 1) return quick_select(a, l_, l - 1, k);
+	if (k > l - l_ + 1) return quick_select(a, r + 1, r_, k - (l - l_ + 1));
+}
+	
+	
+
+int main()
+{
+	
+	int n = 6;
+	srand(time(0));
+	
+	for (int i = 0; i < n; i++)
+		//a[i] = rand();
+		cin >> a[i];
+		
+	//bubble_sort(a, 0, n - 1, n);
+	//quick_sort(a, 0, n - 1);
+	int k = 5;
+	//cout << quick_select(a, 0, n -1, k) << endl;
+	merge_sort(a, 0, n - 1);
+	//for (int i = 0; i < n; i++)
+		//cout << a[i] << ' ';
+	cout << ans << endl;
+	cout << endl;
+	return 0;
+}
+
+例题：导弹拦截
+{
+    保证两个圆的边界上都有点，
+    减少一个中心的点，另一个增加一个，
+    逐步缩小该中心的范围，记录枚举的结果
+}；
+
+例题：瑞士轮
+{
+  第一种：每轮比赛之后，重新排序；
+  第二种：对单独一名选手进行调整；
+  第三种:
+  竞赛更多考察对于题目的理解；
+}；
+
+例题：火柴排队
+{
+  1.a1<a2<```,b1<b2<```这样的排序是最优的
+  2.用归并排序求逆序对
+}；
+
+快速幂、高精度；
+
+例题：解方程
