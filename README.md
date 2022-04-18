@@ -1,9 +1,1 @@
-### hello-world
-
-Hi,everybody!
-
-Xiao'kang Zhao here.I'm a student and I'm learning about programming now.
-The language that I'm using is ``C++``.
-Hope I can find some friends here.
-
-That's it.
+Notes of basic algorithms learned during my middle school period.
