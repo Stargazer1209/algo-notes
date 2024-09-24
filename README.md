@@ -1,3 +1,3 @@
-Notes of basic algorithms learned during my middle school period.
-
-中学时期学习基础算法的笔记。
+basically everything noted while doing anything related to computer science.
+T. B. D.
+categorize all the notes.
