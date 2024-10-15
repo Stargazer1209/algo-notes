@@ -44,3 +44,14 @@
   1. 慢开始门限ssthresh = 当前拥塞窗口cwnd/ 2 ；
   2. 新拥塞窗口cwnd= 慢开始门限ssthresh；
   3. 开始执行拥塞避免算法，使拥塞窗口缓慢地线性增大
+
+### 网络层-概述
+
+连接主机到主机(典型设备包括路由器)  
+**功能:**
+
+1. **转发**: move packets from router's input to appropriate output
+2. **路由**: determine route taken by packets from source to dest
+3. 链接管理: 数据报服务无连接, 虚电路等网络面向连接
+
+>why the slides from our teacher suddenly changed into english ???, i mean, we are all Chinese.
